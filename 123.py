@@ -2,37 +2,35 @@ import matplotlib.pyplot as plt
 
 f = open('file.txt', 'r')
 
-L = []
 x = []
 y = []
 legend = []
+L = []
 
 for e in f:
-    L.append(e)
-
-
-for e in L:
-    if e.__len__() > 5:
+    if e.split().__len__() == 2:
         e = e.split()
-        # print('e = ', e)
-        # print('e[0] = ', e[0])
-        # print('e[1] = ', e[1])
         x.append(float(e[0]))
         y.append(float(e[1]))
-    elif 3 < e.__len__() < 6:
+    elif e.split().__len__() == 1:
         e = e.split()
-        if e.__len__() == 1:
-            legend.append(e[0])
-            # x.append(e[0] + '\t')
-            # y.append(e[0] + '\t')
+        legend.append(e[0])
 
-#8985
+# print(legend)
+# for e in range(0,9000,500):
+#     plt.step(x[e:e+500], y[e:e+500], label=str(legend[int(e/500)]))
 
-for e in range(0,8985,500):
-    plt.plot(x[e:e+499], y[e:e+499])
+for e in range(0,9000,10):
+    y[e] = sum(y[e:e+10])
+    plt.step(x[e:e+10], y[e:e+10])
 
-# plt.plot(x[:500], y[:500])
 plt.xlabel('MeV')
-# plt.xscale('log')
+plt.ylabel('Count')
 plt.yscale('log')
+plt.title('grafik')
+# plt.legend(loc='upper left')
+plt.grid()
 plt.show()
+
+# Изменить диапазон - 10 точек
+#Добавить погрешности - корень из величины (график - точки + погрешности, без линий)
